@@ -74,6 +74,40 @@ export default function HomeScreen(){
         setDescricao(item.descricao); // preenche o campo de descrição com a descrição do gasto selecionado
         setValor(item.valor); // preenche o campo de valor com o valor do gasto selecionado convertido para string
         setEditandoId(item.id); // define o id do gasto sendo editado   
-    }
+    };
+    // calculo do valor de gastos
+    const totalGastos = gastos.reduce((acc, item) => acc + parseFloat(item.valor), 0) // soma os valores dos gastos para calcular o total
+    .toFixed(2); // formata o total para 2 casas decimais
+
+    // retorna os elementos visuais da interface
+    return(
+        <View style={style.container}>
+            <Text style = {style.title}>Controle de Gastos</Text>
+            
+            {/* Campo de entrada para descrição do gasto */}
+            <TextInput style={style.input} placeholder="Descrição de Gasto" value={descricao} onChangeText={setDescricao}/>
+
+             {/* Campo de entrada de valor */}
+            <TextInput style={style.input} keyboardType="numeric" placeholder="Valor" value={valor} onChangeText={setValor} />
+
+
+
+        </View>
+    );
 
 }
+
+// estilos para os componentes visuais
+const style = StyleSheet.create({
+    container: {
+
+    },
+    title: {
+
+
+    },
+    input: {
+
+    }
+
+});
