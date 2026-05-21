@@ -50,8 +50,30 @@ export default function HomeScreen(){
             valor: parseFloat(valor).toFixed(2) // valor do gasto formatado para 2 casas decimais
         };
         setGastos([...gastos, novoGasto]); // adiciona o novo gasto à lista de gastos
+        
         }
+        // Limpa os campos de descrição e valor após adicionar ou atualizar um gasto
+        setDescricao(''); // limpa o campo de descrição
+        setValor(''); // limpa o campo de valor
       
+    };
+    // Função para remover um gasto da lista 
+    const removerGasto = (id) =>{
+        setGastos(gastos.filter(item => item.id !== id)); // filtra a lista de gastos para remover o gasto com o id especificado
+        // verifica se o item removido é o mesmo que está sendo editado, se sim, limpa o estado de edição
+        if(editandoId == id){
+            setEditandoId(null); // limpa o estado de edição se o item removido for o mesmo que está sendo editado
+            setDescricao(''); // limpa o campo de descrição
+            setValor(''); // limpa o campo de valor
+
+        }
+    };
+
+    // Funcão para preencher o fomulário com os dados do gasto selecionado para edição
+    const editarGasto = (item) =>{
+        setDescricao(item.descricao); // preenche o campo de descrição com a descrição do gasto selecionado
+        setValor(item.valor); // preenche o campo de valor com o valor do gasto selecionado convertido para string
+        setEditandoId(item.id); // define o id do gasto sendo editado   
     }
 
 }
