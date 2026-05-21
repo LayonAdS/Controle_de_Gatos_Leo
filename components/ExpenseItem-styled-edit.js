@@ -15,7 +15,7 @@ import{
 
 
 // componente pricipal 
-export default HomeScreen(){
+export default function HomeScreen(){
     // Estado para os campos de formualario
     const[descricao, setDescricao] = useState('');
     const[valor, setValor] = useState('');
