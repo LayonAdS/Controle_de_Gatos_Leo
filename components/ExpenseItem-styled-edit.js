@@ -29,7 +29,29 @@ export default function HomeScreen(){
             Alert.alert('Erro', 'Preencha todos os campos');
             return;
         }
-    }
+    
 
+     // validação para verificar valor numerico no campo valor
+     if(isNaN(parseFloat(valor))){
+        Alert.alert('Erro', 'Digite um valor numérico');
+        return;
+     }
+     if(editandoId){
+        const gastoAtualizados = gastos.map(item =>
+        // atualiza gasto existente com base no Id
+        item.id == editandoId ? {...item, descricao, valor: parseFloat(valor).toFixed(2)}: item);
+        setGastos(gastoAtualizados); // atualiza a lista de gastos com o gasto editado
+        setEditandoId(null); // limpa o estado de edição
+     }else{
+        // Criação de novo gasto com id único baseado no timestamp
+        const novoGasto = {
+            id: Date.now().toString(), // gera um id único usando o timestamp
+            descricao, // descrição do gasto
+            valor: parseFloat(valor).toFixed(2) // valor do gasto formatado para 2 casas decimais
+        };
+        setGastos([...gastos, novoGasto]); // adiciona o novo gasto à lista de gastos
+        }
+      
+    }
 
 }
