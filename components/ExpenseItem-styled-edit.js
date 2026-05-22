@@ -10,7 +10,9 @@ import{
     TouchbleOpscity,  // botão personalizado
     FlatList,  // lista de rolagem eficiente
     StyleSheet,  // estilização 
-    Alert  // exibição de alertas
+    Alert,  // exibição de alertas
+    Touchable,
+    TouchableOpacity
 }from 'react-native';
 
 
@@ -90,6 +92,36 @@ export default function HomeScreen(){
              {/* Campo de entrada de valor */}
             <TextInput style={style.input} keyboardType="numeric" placeholder="Valor" value={valor} onChangeText={setValor} />
 
+            {/* Botão para adicionar ou atualizar gasto */}
+            <TouchbleOpscity style={style.button} onPress={adicionarOuAtualizar}>
+                <Text style={style.buttonText}>{editandoId ? 'Atualizar Gasto' : 'Adicionar Gasto'}
+
+                </Text>
+            </TouchbleOpscity>
+
+          {/*lista de gastos exibidos na FlatList */}
+            <FlatList
+                 data={gastos}                   //Fonte de dados
+                 keyExtractor={item => item.id}  // Identificador único
+                 renderItem={({ item }) => (
+             <View style={styles.itemContainer}>
+                {/* Exibie a descrição e valor */}
+                <Text style={styles.item}>
+                    {item.descricao} - R$ {item.valor}
+                </Text>
+           
+                {/* Ações de edição e remoção */}
+                 <View style={styles.actions}>
+                    <TouchableOpacity onPress={() => editarGasto(item)} style={styles.editButton}>
+                        <Text style={styles.actionText}>
+                            Editar
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+             </View>
+                )}
+       
+             />
 
 
         </View>
@@ -108,6 +140,21 @@ const style = StyleSheet.create({
     },
     input: {
 
+    },
+    button: {
+
+    },
+    buttonText: {
+
+    },
+    actions: {
+
+    },
+    editButton: {
+
+    },
+    actionText: {
+    
     }
 
 });
